@@ -13,7 +13,15 @@ dotenv.config({
 
 const app = express();
 
-DB_NameConnection();
+DB_NameConnection()
+  .then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(`service is running at port ${process.env.PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 // (async () => {
 //   try {
